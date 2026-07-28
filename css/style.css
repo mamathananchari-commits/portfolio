@@ -7,209 +7,266 @@
     --secondary: #1d4ed8;
     --white: #ffffff;
     --dark: #1e293b;
-    --light: #f8fafc;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --light: #f1f5f9;
+    --shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-
 
 /* ================================
    RESET
 ================================ */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-
 
 /* ================================
    BODY
 ================================ */
 
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background: var(--light);
-    color: var(--dark);
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--light);
+    color:var(--dark);
+    line-height:1.6;
+    transition:0.4s;
 }
-
 
 /* ================================
    HEADER
 ================================ */
 
-.header {
-    background: var(--primary);
-    color: var(--white);
-    padding: 20px 40px;
+.header{
+    background:var(--primary);
+    color:white;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-    flex-wrap: wrap;
+    padding:22px 40px;
 
-    box-shadow: var(--shadow);
+    box-shadow:var(--shadow);
 }
 
-.header h1 {
-    font-size: 2rem;
+.header h1{
+    font-size:2.2rem;
 }
-
 
 /* ================================
-   NAVIGATION
+   NAVBAR
 ================================ */
 
-.navbar {
-    display: flex;
-    gap: 20px;
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:25px;
 }
 
-.navbar a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 500;
-
-    transition: 0.3s;
+.navbar a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:500;
+    transition:.3s;
 }
 
-.navbar a:hover {
-    color: #ffd43b;
+.navbar a:hover{
+    color:#ffd43b;
 }
-
 
 /* ================================
-   MAIN CONTAINER
+   THEME BUTTON
 ================================ */
 
-.container {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 20px;
+#theme-toggle{
+    background:white;
+    border:none;
+    border-radius:50%;
+    width:38px;
+    height:38px;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
 }
 
+#theme-toggle:hover{
+    transform:scale(1.1);
+}
 
 /* ================================
-   CARDS
+   CONTAINER
 ================================ */
 
-.card {
-    background: var(--white);
-
-    padding: 25px;
-    margin-bottom: 25px;
-
-    border-radius: 12px;
-
-    box-shadow: var(--shadow);
-
-    transition: transform 0.3s;
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:40px auto;
 }
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h2 {
-    color: var(--primary);
-    margin-bottom: 15px;
-}
-
-.card p {
-    margin-bottom: 15px;
-}
-
 
 /* ================================
-   BUTTONS / LINKS
+   CARD
 ================================ */
 
-.card a {
-    display: inline-block;
-
-    background: var(--primary);
-    color: var(--white);
-
-    text-decoration: none;
-
-    padding: 10px 18px;
-
-    border-radius: 6px;
-
-    transition: 0.3s;
+.card{
+    background:white;
+    margin-bottom:35px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    transition:.3s;
 }
 
-.card a:hover {
-    background: var(--secondary);
+.card:hover{
+    transform:translateY(-5px);
 }
 
+.card h2{
+    color:var(--primary);
+    margin-bottom:15px;
+    font-size:2rem;
+}
+
+.card p{
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+/* ================================
+   LIST
+================================ */
+
+.card ul{
+    margin-left:25px;
+    margin-bottom:20px;
+}
+
+.card li{
+    margin-bottom:10px;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+
+.card a{
+    display:inline-block;
+    background:var(--primary);
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.card a:hover{
+    background:var(--secondary);
+}
 
 /* ================================
    FOOTER
 ================================ */
 
-footer {
-    background: var(--primary);
-    color: var(--white);
-
-    text-align: center;
-
-    padding: 20px;
+footer{
+    background:var(--primary);
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
 }
-
 
 /* ================================
-   RESPONSIVE DESIGN
+   RESPONSIVE TABLET
 ================================ */
 
-/* Tablet */
-@media (max-width: 768px) {
+@media(max-width:768px){
 
-    .header {
-        flex-direction: column;
-        gap: 15px;
-
-        text-align: center;
-    }
-
-    .navbar {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .container {
-        padding: 15px;
-    }
+.header{
+    flex-direction:column;
+    gap:20px;
+    text-align:center;
 }
 
+.navbar{
+    flex-wrap:wrap;
+    justify-content:center;
+}
 
-/* Mobile */
-@media (max-width: 480px) {
+.container{
+    width:95%;
+}
 
-    .header {
-        padding: 20px;
-    }
+}
 
-    .header h1 {
-        font-size: 1.5rem;
-    }
+/* ================================
+   RESPONSIVE MOBILE
+================================ */
 
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
-    }
+@media(max-width:480px){
 
-    .card {
-        padding: 20px;
-    }
+.header h1{
+    font-size:1.8rem;
+}
 
-    .card h2 {
-        font-size: 1.4rem;
-    }
+.navbar{
+    flex-direction:column;
+    gap:12px;
+}
 
-    footer {
-        font-size: 0.9rem;
-    }
+.card{
+    padding:22px;
+}
+
+.card h2{
+    font-size:1.5rem;
+}
+
+.card p{
+    font-size:16px;
+}
+
+}
+
+/* ================================
+   DARK MODE
+================================ */
+
+.dark-mode{
+    background:#111827;
+    color:white;
+}
+
+.dark-mode .header{
+    background:#0f172a;
+}
+
+.dark-mode .card{
+    background:#1f2937;
+    color:white;
+}
+
+.dark-mode .card h2{
+    color:#60a5fa;
+}
+
+.dark-mode .card a{
+    background:#2563eb;
+}
+
+.dark-mode .card a:hover{
+    background:#1d4ed8;
+}
+
+.dark-mode footer{
+    background:#0f172a;
+}
+
+.dark-mode .navbar a{
+    color:white;
+}
+
+.dark-mode #theme-toggle{
+    background:#374151;
+    color:white;
 }
