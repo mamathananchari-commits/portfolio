@@ -14,7 +14,6 @@ if (localStorage.getItem("theme") === "dark") {
 
 if (themeToggle) {
     themeToggle.addEventListener("click", () => {
-
         document.body.classList.toggle("dark-mode");
 
         if (document.body.classList.contains("dark-mode")) {
@@ -24,56 +23,56 @@ if (themeToggle) {
             themeToggle.textContent = "🌙";
             localStorage.setItem("theme", "light");
         }
-
     });
 }
 
-
 // ================================
-// PROJECT MANAGEMENT
+// TO-DO LIST MANAGEMENT
 // ================================
 
-const projectName = document.getElementById("projectName");
-const projectDesc = document.getElementById("projectDesc");
-const addProjectBtn = document.getElementById("addProjectBtn");
-const projectList = document.getElementById("projectList");
+const taskName = document.getElementById("projectName");
+const taskDesc = document.getElementById("projectDesc");
+const addTaskBtn = document.getElementById("addProjectBtn");
+
+const taskList = document.getElementById("projectList");
 
 const allBtn = document.getElementById("allBtn");
 const activeBtn = document.getElementById("activeBtn");
 const completedBtn = document.getElementById("completedBtn");
 
-if (projectName && projectDesc && addProjectBtn && projectList) {
+if (taskName && taskDesc && addTaskBtn && taskList) {
 
-    let projects = JSON.parse(localStorage.getItem("projects")) || [];
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    function saveProjects() {
-        localStorage.setItem("projects", JSON.stringify(projects));
+    function saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     }
 
-    function displayProjects(filter = "all") {
+    function displayTasks(filter = "all") {
 
-        projectList.innerHTML = "";
+        taskList.innerHTML = "";
 
-        projects.forEach((project, index) => {
+        tasks.forEach((task, index) => {
 
-            if (filter === "active" && project.completed) return;
-            if (filter === "completed" && !project.completed) return;
+            if (filter === "active" && task.completed) return;
+            if (filter === "completed" && !task.completed) return;
 
-            const item = document.createElement("li");
+            const div = document.createElement("div");
+            div.className = "task-item";
 
-            if (project.completed) {
-                item.classList.add("completed");
+            if (task.completed) {
+                div.classList.add("completed");
             }
 
-            item.innerHTML = `
+            div.innerHTML = `
                 <div class="project-info">
-                    <h3>${project.name}</h3>
-                    <p>${project.desc}</p>
+                    <h3>${task.name}</h3>
+                    <p>${task.desc}</p>
                 </div>
 
                 <div class="project-buttons">
                     <button class="complete" data-index="${index}">
-                        ${project.completed ? "Undo" : "Complete"}
+                        ${task.completed ? "Undo" : "Complete"}
                     </button>
 
                     <button class="edit" data-index="${index}">
@@ -86,39 +85,36 @@ if (projectName && projectDesc && addProjectBtn && projectList) {
                 </div>
             `;
 
-            projectList.appendChild(item);
-
+            taskList.appendChild(div);
         });
-
     }
 
-    // Add Project
-    addProjectBtn.addEventListener("click", () => {
+    // Add Task
+    addTaskBtn.addEventListener("click", () => {
 
-        const name = projectName.value.trim();
-        const desc = projectDesc.value.trim();
+        const name = taskName.value.trim();
+        const desc = taskDesc.value.trim();
 
         if (name === "" || desc === "") {
-            alert("Please enter both project name and description.");
+            alert("Please enter task name and description.");
             return;
         }
 
-        projects.push({
+        tasks.push({
             name,
             desc,
             completed: false
         });
 
-        saveProjects();
-        displayProjects();
+        saveTasks();
+        displayTasks();
 
-        projectName.value = "";
-        projectDesc.value = "";
-
+        taskName.value = "";
+        taskDesc.value = "";
     });
 
-    // Edit / Delete / Complete
-    projectList.addEventListener("click", (e) => {
+    // Event Delegation
+    taskList.addEventListener("click", (e) => {
 
         const index = e.target.dataset.index;
 
@@ -126,48 +122,43 @@ if (projectName && projectDesc && addProjectBtn && projectList) {
 
         if (e.target.classList.contains("delete")) {
 
-            projects.splice(index, 1);
+            tasks.splice(index, 1);
 
-        }
+        } else if (e.target.classList.contains("complete")) {
 
-        else if (e.target.classList.contains("complete")) {
+            tasks[index].completed = !tasks[index].completed;
 
-            projects[index].completed = !projects[index].completed;
+        } else if (e.target.classList.contains("edit")) {
 
-        }
-
-        else if (e.target.classList.contains("edit")) {
-
-            const newName = prompt("Edit Project Name", projects[index].name);
+            const newName = prompt("Edit Task Name", tasks[index].name);
 
             if (newName === null) return;
 
-            const newDesc = prompt("Edit Project Description", projects[index].desc);
+            const newDesc = prompt("Edit Task Description", tasks[index].desc);
 
             if (newDesc === null) return;
 
-            projects[index].name = newName.trim();
-            projects[index].desc = newDesc.trim();
-
+            tasks[index].name = newName;
+            tasks[index].desc = newDesc;
         }
 
-        saveProjects();
-        displayProjects();
-
+        saveTasks();
+        displayTasks();
     });
 
     // Filter Buttons
+
     if (allBtn) {
-        allBtn.addEventListener("click", () => displayProjects("all"));
+        allBtn.addEventListener("click", () => displayTasks("all"));
     }
 
     if (activeBtn) {
-        activeBtn.addEventListener("click", () => displayProjects("active"));
+        activeBtn.addEventListener("click", () => displayTasks("active"));
     }
 
     if (completedBtn) {
-        completedBtn.addEventListener("click", () => displayProjects("completed"));
+        completedBtn.addEventListener("click", () => displayTasks("completed"));
     }
 
-    displayProjects();
+    displayTasks();
 }
